@@ -1,0 +1,20 @@
+{
+  "contractName": "PolygonZkEVMGlobalExitRoot",
+  "address": "0xA9676618Fb23CE5c006b2E87dF98702Af3326b3A",
+  "solidityVersion": "0.8.20",
+  "compiler": "solc",
+  "constructorArguments": [
+    "0x0000000000000000000000000000000000000000",
+    "0xaE3Df5BDfE3A3A075b17fE190fCfE29699fc0288"
+  ],
+  "sourceFiles": [
+    "contracts/PolygonZkEVMGlobalExitRoot.sol",
+    "contracts/interfaces/IPolygonZkEVMGlobalExitRoot.sol",
+    "contracts/lib/GlobalExitRootLib.sol"
+  ],
+  "optimization": false,
+  "runs": 200,
+  "network": "tan",
+  "chainId": 2334,
+  "deploymentTime": "2025-10-01T06:04:29.783Z"
+}

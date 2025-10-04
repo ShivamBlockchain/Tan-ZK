@@ -1,0 +1,46 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "EmergencyManager",
+  "sourceName": "contracts/lib/EmergencyManager.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "OnlyEmergencyState",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "OnlyNotEmergencyState",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [],
+      "name": "EmergencyStateActivated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [],
+      "name": "EmergencyStateDeactivated",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "isEmergencyState",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6080604052348015600f57600080fd5b5060c280601d6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c806315064c9614602d575b600080fd5b60336047565b604051603e91906073565b60405180910390f35b600a60009054906101000a900460ff1681565b60008115159050919050565b606d81605a565b82525050565b6000602082019050608660008301846066565b9291505056fea2646970667358221220bd8ef5fa247d5ef0b57d0b968eb18838ebf292be32071bfb99a4197b27d4756664736f6c634300081e0033",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060285760003560e01c806315064c9614602d575b600080fd5b60336047565b604051603e91906073565b60405180910390f35b600a60009054906101000a900460ff1681565b60008115159050919050565b606d81605a565b82525050565b6000602082019050608660008301846066565b9291505056fea2646970667358221220bd8ef5fa247d5ef0b57d0b968eb18838ebf292be32071bfb99a4197b27d4756664736f6c634300081e0033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

@@ -1,0 +1,116 @@
+# ===============================
+# zkEVM Node Configuration
+# ===============================
+
+[Log]
+Environment = "development"  
+Level = "info"
+Outputs = ["stderr"]
+
+# ===============================
+# State Database
+# ===============================
+[State]
+  [State.DB]
+  User = "state_user"
+  Password = "state_password"
+  Name = "state_db"
+  Host = "zkevm-state-db"
+  Port = "5432"
+  EnableLog = false
+  MaxConns = 200
+
+# ===============================
+# Transaction Pool
+# ===============================
+[Pool]
+MaxTxBytesSize = 100132
+MaxTxDataBytesSize = 100000
+DefaultMinGasPriceAllowed = 1000000000
+MinAllowedGasPriceInterval = "5m"
+PollMinAllowedGasPriceInterval = "15s"
+AccountQueue = 64
+GlobalQueue = 1024
+
+  [Pool.DB]
+  User = "pool_user"
+  Password = "pool_password"
+  Name = "pool_db"
+  Host = "zkevm-pool-db"
+  Port = "5432"
+  EnableLog = false
+  MaxConns = 200
+
+# ===============================
+# Layer 1 RPC (Etherman)
+# ===============================
+[Etherman]
+URL = "http://161.97.89.79:8545"  
+ForkIDChunkSize = 20000
+MultiGasProvider = false
+ChainID = 2334
+
+# ===============================
+# zkEVM Node RPC
+# ===============================
+[RPC]
+Host = "0.0.0.0"
+Port = 8555
+ReadTimeout = "60s"
+WriteTimeout = "60s"
+MaxRequestsPerIPAndSecond = 5000
+
+  [RPC.WebSockets]
+  Enabled = true
+  Port = 9091
+
+# ===============================
+# Synchronizer
+# ===============================
+[Synchronizer]
+SyncInterval = "2s"
+SyncChunkSize = 100
+
+# ===============================
+# Prover / Executor gRPC
+# ===============================
+[MTClient]
+URI = "zkevm-prover:50061"
+
+[Executor]
+URI = "zkevm-prover:50071"
+MaxResourceExhaustedAttempts = 3
+WaitOnResourceExhaustion = "1s"
+MaxGRPCMessageSize = 100000000
+
+# ===============================
+# Metrics / Profiling
+# ===============================
+[Metrics]
+Host = "0.0.0.0"
+Port = 9091
+Enabled = false
+ProfilingHost = "0.0.0.0"
+ProfilingPort = 6060
+ProfilingEnabled = false
+
+# ===============================
+# HashDB (Prover State DB)
+# ===============================
+[HashDB]
+User = "prover_user"
+Password = "prover_pass"
+Name = "prover_db"
+Host = "zkevm-state-db"
+Port = "5432"
+EnableLog = false
+MaxConns = 200
+
+# ===============================
+# Smart Contracts (L1 addresses)
+# ===============================
+[SmartContracts]
+GlobalExitRootManagerAddr = "0xA9676618Fb23CE5c006b2E87dF98702Af3326b3A"
+BridgeAddr = "0xaE3Df5BDfE3A3A075b17fE190fCfE29699fc0288"
+PolygonZkEVMAddr = "0x67Eb0Ab3392B2ef973Bc4A719a92C156210cEbc5"
+TimelockAddr = "0x0C4cecf61ff703b7cD84679016dacCb0Ac7d6D8D"

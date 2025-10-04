@@ -1,0 +1,22 @@
+{
+  "contractName": "PolygonZkEVMBridge",
+  "address": "0xaE3Df5BDfE3A3A075b17fE190fCfE29699fc0288",
+  "solidityVersion": "0.8.20",
+  "compiler": "solc",
+  "constructorArguments": [],
+  "sourceFiles": [
+    "contracts/PolygonZkEVMBridge.sol",
+    "contracts/lib/DepositContract.sol",
+    "contracts/lib/TokenWrapped.sol",
+    "contracts/lib/EmergencyManager.sol",
+    "contracts/lib/GlobalExitRootLib.sol",
+    "contracts/interfaces/IBasePolygonZkEVMGlobalExitRoot.sol",
+    "contracts/interfaces/IBridgeMessageReceiver.sol",
+    "contracts/interfaces/IPolygonZkEVMBridge.sol"
+  ],
+  "optimization": false,
+  "runs": 200,
+  "network": "tan",
+  "chainId": 2334,
+  "deploymentTime": "2025-10-01T06:04:29.783Z"
+}

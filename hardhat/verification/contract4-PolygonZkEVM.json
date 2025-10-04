@@ -1,0 +1,27 @@
+{
+  "contractName": "PolygonZkEVM",
+  "address": "0x67Eb0Ab3392B2ef973Bc4A719a92C156210cEbc5",
+  "solidityVersion": "0.8.20",
+  "compiler": "solc",
+  "constructorArguments": [
+    "0xA9676618Fb23CE5c006b2E87dF98702Af3326b3A",
+    "0x0000000000000000000000000000000000000000",
+    "0x0000000000000000000000000000000000000000",
+    "0xaE3Df5BDfE3A3A075b17fE190fCfE29699fc0288",
+    1,
+    0
+  ],
+  "sourceFiles": [
+    "contracts/PolygonZkEVM.sol",
+    "contracts/interfaces/IVerifierRollup.sol",
+    "contracts/interfaces/IPolygonZkEVMGlobalExitRoot.sol",
+    "contracts/interfaces/IPolygonZkEVMBridge.sol",
+    "contracts/interfaces/IPolygonZkEVMErrors.sol",
+    "contracts/lib/EmergencyManager.sol"
+  ],
+  "optimization": false,
+  "runs": 200,
+  "network": "tan",
+  "chainId": 2334,
+  "deploymentTime": "2025-10-01T06:04:29.783Z"
+}

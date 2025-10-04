@@ -1,0 +1,28 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/PolygonZkEVMTimelock.sol": {
+      "content": "// SPDX-License-Identifier: AGPL-3.0\npragma solidity 0.8.20;\n\nimport \"@openzeppelin/contracts/governance/TimelockController.sol\";\nimport \"./PolygonZkEVM.sol\";\n\n/**\n * @dev Contract module which acts as a timelocked controller.\n * This gives time for users of the controlled contract to exit before a potentially dangerous maintenance operation is applied.\n * If emergency mode of the zkevm contract system is active, this timelock have no delay.\n */\ncontract PolygonZkEVMTimelock is TimelockController {\n    // Polygon ZK-EVM address. Will be used to check if it's on emergency state.\n    PolygonZkEVM public immutable polygonZkEVM;\n\n    /**\n     * @notice Constructor of timelock\n     * @param minDelay initial minimum delay for operations\n     * @param proposers accounts to be granted proposer and canceller roles\n     * @param executors accounts to be granted executor role\n     * @param admin optional account to be granted admin role; disable with zero address\n     * @param _polygonZkEVM polygonZkEVM address\n     **/\n    constructor(\n        uint256 minDelay,\n        address[] memory proposers,\n        address[] memory executors,\n        address admin,\n        PolygonZkEVM _polygonZkEVM\n    ) TimelockController(minDelay, proposers, executors, admin) {\n        polygonZkEVM = _polygonZkEVM;\n    }\n\n    /**\n     * @dev Returns the minimum delay for an operation to become valid.\n     *\n     * This value can be changed by executing an operation that calls `updateDelay`.\n     * If Polygon ZK-EVM is on emergency state the minDelay will be 0 instead.\n     */\n    function getMinDelay() public view override returns (uint256 duration) {\n        if (address(polygonZkEVM) != address(0) && polygonZkEVM.isEmergencyState()) {\n            return 0;\n        } else {\n            return super.getMinDelay();\n        }\n    }\n}"
+    },
+    "contracts/PolygonZkEVM.sol": {
+      "content": "// SPDX-License-Identifier: AGPL-3.0\npragma solidity ^0.8.20;\n\nimport \"@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol\";\nimport \"./interfaces/IVerifierRollup.sol\";\nimport \"./interfaces/IPolygonZkEVMGlobalExitRoot.sol\";\nimport \"@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol\";\nimport \"./interfaces/IPolygonZkEVMBridge.sol\";\nimport \"./lib/EmergencyManager.sol\";\nimport \"./interfaces/IPolygonZkEVMErrors.sol\";\n\n/**\n * Contract responsible for managing the states and the updates of L2 network.\n * There will be a trusted sequencer, which is able to send transactions.\n * Any user can force some transaction and the sequencer will have a timeout to add them in the queue.\n * The sequenced state is deterministic and can be precalculated before it's actually verified by a zkProof.\n * The aggregators will be able to verify the sequenced state with zkProofs and therefore make available the withdrawals from L2 network.\n * To enter and exit of the L2 network will be used a PolygonZkEVMBridge smart contract that will be deployed in both networks.\n */\ncontract PolygonZkEVM is\n    OwnableUpgradeable,\n    EmergencyManager,\n    IPolygonZkEVMErrors\n{\n    using SafeERC20Upgradeable for IERC20Upgradeable;\n\n    // ... (rest of the contract content would go here)\n    // Note: This is a simplified version for JSON input\n    \n    // Placeholder for the actual contract content\n    // In real implementation, you would include the full contract source\n}"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "evmVersion": "paris",
+    "libraries": {},
+    "outputSelection": {
+      "*": {
+        "*": [
+          "evm.bytecode.object",
+          "evm.deployedBytecode.object",
+          "abi"
+        ]
+      }
+    }
+  }
+}

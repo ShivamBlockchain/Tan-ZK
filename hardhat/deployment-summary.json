@@ -1,0 +1,12 @@
+{
+  "network": "tan",
+  "deployer": "0xaf2fB6b29468B5bd2cB9D3Bec0385Cd4fccfE9D7",
+  "deploymentTime": "2025-10-01T06:04:29.783Z",
+  "contracts": {
+    "PolygonZkEVMGlobalExitRootL2": "0x43d0bD3F8DE7Bc9a2A23b9c8b7f47bD2cAd15413",
+    "PolygonZkEVMBridge": "0xaE3Df5BDfE3A3A075b17fE190fCfE29699fc0288",
+    "PolygonZkEVMGlobalExitRoot": "0xA9676618Fb23CE5c006b2E87dF98702Af3326b3A",
+    "PolygonZkEVM": "0x67Eb0Ab3392B2ef973Bc4A719a92C156210cEbc5",
+    "PolygonZkEVMTimelock": "0x0C4cecf61ff703b7cD84679016dacCb0Ac7d6D8D"
+  }
+}

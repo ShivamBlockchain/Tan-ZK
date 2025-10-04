@@ -1,0 +1,89 @@
+{
+  "network": "tan",
+  "chainId": 2334,
+  "timestamp": "2025-10-01T06:11:21.344Z",
+  "contracts": {
+    "PolygonZkEVMGlobalExitRootL2": {
+      "address": "0x43d0bD3F8DE7Bc9a2A23b9c8b7f47bD2cAd15413",
+      "constructorArgs": [
+        "0x0000000000000000000000000000000000000000"
+      ],
+      "solidityVersion": "0.8.20",
+      "compiler": "solc",
+      "sourceFiles": [
+        "contracts/PolygonZkEVMGlobalExitRootL2.sol",
+        "contracts/interfaces/",
+        "contracts/lib/",
+        "lib/"
+      ]
+    },
+    "PolygonZkEVMBridge": {
+      "address": "0xaE3Df5BDfE3A3A075b17fE190fCfE29699fc0288",
+      "constructorArgs": [],
+      "solidityVersion": "0.8.20",
+      "compiler": "solc",
+      "sourceFiles": [
+        "contracts/PolygonZkEVMBridge.sol",
+        "contracts/interfaces/",
+        "contracts/lib/",
+        "lib/"
+      ]
+    },
+    "PolygonZkEVMGlobalExitRoot": {
+      "address": "0xA9676618Fb23CE5c006b2E87dF98702Af3326b3A",
+      "constructorArgs": [
+        "0x0000000000000000000000000000000000000000",
+        "0xaE3Df5BDfE3A3A075b17fE190fCfE29699fc0288"
+      ],
+      "solidityVersion": "0.8.20",
+      "compiler": "solc",
+      "sourceFiles": [
+        "contracts/PolygonZkEVMGlobalExitRoot.sol",
+        "contracts/interfaces/",
+        "contracts/lib/",
+        "lib/"
+      ]
+    },
+    "PolygonZkEVM": {
+      "address": "0x67Eb0Ab3392B2ef973Bc4A719a92C156210cEbc5",
+      "constructorArgs": [
+        "0xA9676618Fb23CE5c006b2E87dF98702Af3326b3A",
+        "0x0000000000000000000000000000000000000000",
+        "0x0000000000000000000000000000000000000000",
+        "0xaE3Df5BDfE3A3A075b17fE190fCfE29699fc0288",
+        1,
+        0
+      ],
+      "solidityVersion": "0.8.20",
+      "compiler": "solc",
+      "sourceFiles": [
+        "contracts/PolygonZkEVM.sol",
+        "contracts/interfaces/",
+        "contracts/lib/",
+        "lib/"
+      ]
+    },
+    "PolygonZkEVMTimelock": {
+      "address": "0x0C4cecf61ff703b7cD84679016dacCb0Ac7d6D8D",
+      "constructorArgs": [
+        0,
+        [
+          "0xaf2fB6b29468B5bd2cB9D3Bec0385Cd4fccfE9D7"
+        ],
+        [
+          "0xaf2fB6b29468B5bd2cB9D3Bec0385Cd4fccfE9D7"
+        ],
+        "0xaf2fB6b29468B5bd2cB9D3Bec0385Cd4fccfE9D7",
+        "0x67Eb0Ab3392B2ef973Bc4A719a92C156210cEbc5"
+      ],
+      "solidityVersion": "0.8.20",
+      "compiler": "solc",
+      "sourceFiles": [
+        "contracts/PolygonZkEVMTimelock.sol",
+        "contracts/interfaces/",
+        "contracts/lib/",
+        "lib/"
+      ]
+    }
+  }
+}

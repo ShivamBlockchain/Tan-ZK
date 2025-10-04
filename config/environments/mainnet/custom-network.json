@@ -1,0 +1,9 @@
+{
+  "l1Config": {
+    "chainId": 2334,
+    "polygonZkEVMAddress": "0x67Eb0Ab3392B2ef973Bc4A719a92C156210cEbc5",
+    "polTokenAddress": "0x0000000000000000000000000000000000000000",
+    "polygonZkEVMGlobalExitRootAddress": "0xA9676618Fb23CE5c006b2E87dF98702Af3326b3A"
+  },
+  "genesisBlockNumber": 8
+}
