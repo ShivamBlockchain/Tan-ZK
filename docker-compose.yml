@@ -1,114 +1,98 @@
-version: "3.5"
-networks:
-  default:
-    external: true
-    name: zkevm
+version: "3"
 
 services:
-  zkevm-rpc:
-    container_name: zkevm-rpc
-    restart: unless-stopped
-    depends_on:
-      zkevm-pool-db:
-        condition: service_healthy
-      zkevm-state-db:
-        condition: service_healthy
-      zkevm-sync:
-        condition: service_started
-    image: hermeznetwork/zkevm-node:v0.7.3
-    ports:
-      - 8555:8555
-      - 9091:9091
+  simdnode0:
+    container_name: simdnode0
+    image: "cosmossdk/simd"
     environment:
-      - ZKEVM_NODE_ETHERMAN_URL=${ZKEVM_NODE_ETHERMAN_URL}
-    volumes:
-      - ${ZKEVM_ADVANCED_CONFIG_DIR:-./config/environments/mainnet}/node.config.toml:/app/config.toml
-      - ./config/environments/mainnet/custom-network.json:/app/genesis.json
-
-    command:
-      - "/bin/sh"
-      - "-c"
-      - "/app/zkevm-node run --network ${ZKEVM_NETWORK} --cfg /app/config.toml --components rpc --custom-network-file /app/custom_network.json"
-
-  zkevm-sync:
-    container_name: zkevm-sync
-    restart: unless-stopped
-    depends_on:
-      zkevm-state-db:
-        condition: service_healthy
-    image: hermeznetwork/zkevm-node:v0.7.3
+      - DEBUG=1
+      - ID=0
+      - LOG=${LOG:-simd.log}
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
     ports:
-      - 9092:9091
+      - "26656-26657:26656-26657"
+      - "1317:1317"
+      - "9090:9090"
+      - "2345:2345"
+    volumes:
+      - ./.testnets:/data:Z
+    networks:
+      localnet:
+        ipv4_address: 192.168.10.2
+
+  simdnode1:
+    container_name: simdnode1
+    image: "cosmossdk/simd"
     environment:
-      - ZKEVM_NODE_ETHERMAN_URL=${ZKEVM_NODE_ETHERMAN_URL}
-    volumes:
-      - ${ZKEVM_ADVANCED_CONFIG_DIR:-./config/environments/mainnet}/node.config.toml:/app/config.toml
-      - ./custom_network.json:/app/custom_network.json
-      - ./config/environments/mainnet/custom-network.json:/app/genesis.json
-    command:
-      - "/bin/sh"
-      - "-c"
-      - "/app/zkevm-node run --network ${ZKEVM_NETWORK} --cfg /app/config.toml --components synchronizer --custom-network-file /app/custom_network.json"
-
-  zkevm-state-db:
-    container_name: zkevm-state-db
-    restart: unless-stopped
-    image: postgres:15
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      - DEBUG=0
+      - ID=1
+      - LOG=${LOG:-simd.log}
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
     ports:
-      - 5435:5432
+      - "26666-26667:26656-26657"
+      - "1318:1317"
+      - "9091:9090"
+      - "2346:2345"
     volumes:
-      - ./db/scripts/init_prover_db.sql:/docker-entrypoint-initdb.d/init.sql
-      - ${ZKEVM_NODE_STATEDB_DATA_DIR}:/var/lib/postgresql/data
-      - ${ZKEVM_ADVANCED_CONFIG_DIR:-./config/environments/mainnet}/postgresql.conf:/etc/postgresql.conf
+      - ./.testnets:/data:Z
+    networks:
+      localnet:
+        ipv4_address: 192.168.10.3
+
+  simdnode2:
+    container_name: simdnode2
+    image: "cosmossdk/simd"
     environment:
-      - POSTGRES_USER=state_user
-      - POSTGRES_PASSWORD=state_password
-      - POSTGRES_DB=state_db
-    command:
-      - "postgres"
-      - "-N"
-      - "500"
-      - "-c"
-      - "config_file=/etc/postgresql.conf"
-
-  zkevm-pool-db:
-    container_name: zkevm-pool-db
-    restart: unless-stopped
-    image: postgres:15
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      - DEBUG=0
+      - ID=2
+      - LOG=${LOG:-simd.log}
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
     ports:
-      - 5434:5432
+      - "26676-26677:26656-26657"
+      - "1319:1317"
+      - "9092:9090"
+      - "2347:2345"
     volumes:
-      - ${ZKEVM_NODE_POOLDB_DATA_DIR}:/var/lib/postgresql/data
+      - ./.testnets:/data:Z
+    networks:
+      localnet:
+        ipv4_address: 192.168.10.4
+
+  simdnode3:
+    container_name: simdnode3
+    image: "cosmossdk/simd"
     environment:
-      - POSTGRES_USER=pool_user
-      - POSTGRES_PASSWORD=pool_password
-      - POSTGRES_DB=pool_db
-    command:
-      - "postgres"
-      - "-N"
-      - "500"
-
-  zkevm-prover:
-    container_name: zkevm-prover
-    restart: unless-stopped
-    image: hermeznetwork/zkevm-prover:v6.0.0
-    depends_on:
-      zkevm-state-db:
-        condition: service_healthy
+      - DEBUG=0
+      - ID=3
+      - LOG=${LOG:-simd.log}
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
     ports:
-      - 50061:50061
-      - 50071:50071
+      - "26686-26687:26656-26657"
+      - "1320:1317"
+      - "9093:9090"
+      - "2348:2345"
     volumes:
-      - ${ZKEVM_ADVANCED_CONFIG_DIR:-./config/environments/mainnet}/prover.config.json:/usr/src/app/config.json
-    command: >
-      zkProver -c /usr/src/app/config.json
+      - ./.testnets:/data:Z
+    networks:
+      localnet:
+        ipv4_address: 192.168.10.5
+
+networks:
+  localnet:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.10.0/25
